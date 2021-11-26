@@ -12,7 +12,7 @@ Ecosia and Brave at the same time.
 * Configurable using config.ini file.
 * Verbose interface.
 * Output file contains just unique keywords.
-* Export results to CSV.
+* Export results to TXT.
 
 ## Installation and running 
 To install and run this project copy or clone all the files to your preferred folder and type and execute:
