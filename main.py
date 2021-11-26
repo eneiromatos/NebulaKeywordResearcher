@@ -59,13 +59,12 @@ else:
 
     for kw in input_kws:
         kws = tuple()
-        for letter in ascii_lowercase[0]:
+        for letter in ascii_lowercase:
             new_kw = f'{kw} {letter}'
             for se, getter in kw_getters.items():
                 print(f'Exploring for {new_kw} in {se}')
                 kw_ses = SES.kw_results(getter, new_kw)
                 kws += kw_ses
-                print(kw_ses)
                 print(f'{len(kw_ses)} keywords found in this step.\n')
         FW.write_txt(kws)
     with open(config.output_file, encoding='utf-8') as out_f:
