@@ -1,9 +1,9 @@
 import requests
 import config
+from file_writter import FileWriter as fw
 
 
 class SearchEngineSuggestions:
-
     headers = {
         'user-agent': config.user_agent
     }
@@ -43,8 +43,8 @@ class SearchEngineSuggestions:
         except Exception as e:
             return False, str(e)
         else:
-            results = html.json()[1]
-            return tuple([sugg for sugg in results if isinstance(sugg, str)])
+            results = html.json()
+            return tuple(results[1])
 
     @staticmethod
     def get_duckduckgo(kw: str) -> tuple[str] | tuple[bool, str]:
@@ -99,7 +99,7 @@ class SearchEngineSuggestions:
     def get_bing(kw: str) -> tuple[str] | tuple[bool, str]:
         kw = kw.casefold().replace(' ', '+')
         try:
-            #Got the API from https://stackoverflow.com/a/15318150
+            # Got the API from https://stackoverflow.com/a/15318150
             html = requests.get(f'https://api.bing.com/osjson.aspx?query={kw}',
                                 headers=SearchEngineSuggestions.headers, timeout=config.timeout)
         except Exception as e:
@@ -107,3 +107,15 @@ class SearchEngineSuggestions:
         else:
             results = html.json()
             return tuple(results[1])
+
+    @staticmethod
+    def kw_results(search_engine, kw):
+        kws_search_engine = search_engine(kw)
+        if len(kws_search_engine) > 0:
+            if kws_search_engine[0] is False:
+                fw.write_log(kws_search_engine[1])
+                return tuple()
+            else:
+                return kws_search_engine
+        else:
+            return tuple()
