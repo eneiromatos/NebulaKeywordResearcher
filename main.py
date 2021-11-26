@@ -33,7 +33,7 @@ except FileNotFoundError:
           f'Proceed as follow:\n'
           f'\t1. Put your initial keyword there, one per line.\n'
           f'\t2. Pun this file again to scrape new keywords.\n')
-    input('Press any/+ key to continue')
+    input('Press any key to exit')
     sys.exit()
 else:
     kw_getters = {'Google': SES.get_google,
@@ -47,6 +47,11 @@ else:
                   }
 
     input_kws = [kw.strip('\n').strip() for kw in seed_kws.readlines() if kw not in ('', ' ', '\n', None)]
+
+    if len(input_kws) == 0:
+        print(f'Please insert at least one keyword in {config.input_file} to start, and try again.')
+        input('Press any key to exit')
+        sys.exit()
 
     print(f'{len(input_kws)} keywords will be scanned against {len(kw_getters)} search engines.\n'
           f'This process may take some time, please be patient.\n')
