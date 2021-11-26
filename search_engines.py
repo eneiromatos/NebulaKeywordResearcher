@@ -15,7 +15,7 @@ class SearchEngineSuggestions:
         try:
             html = requests.get(f'https://search.yahoo.com/sugg/gossip/gossip-us-ura/?'
                                 f'command={kw}&output=json&nresults={n_results}',
-                                headers=SearchEngineSuggestions.headers)
+                                headers=SearchEngineSuggestions.headers, timeout=config.timeout)
         except Exception as e:
             return False, str(e)
         else:
@@ -28,7 +28,7 @@ class SearchEngineSuggestions:
         n_results = 20
         try:
             html = requests.get(f'https://amg-ss.ask.com/query?limit={n_results}&q={kw}',
-                                headers=SearchEngineSuggestions.headers)
+                                headers=SearchEngineSuggestions.headers, timeout=config.timeout)
         except Exception as e:
             return False, str(e)
         else:
@@ -39,7 +39,7 @@ class SearchEngineSuggestions:
         kw = kw.casefold().replace(' ', '+')
         try:
             html = requests.get(f'https://yandex.com/suggest/suggest-ya.cgi?v=4&bemjson=0&part={kw}',
-                                headers=SearchEngineSuggestions.headers)
+                                headers=SearchEngineSuggestions.headers, timeout=config.timeout)
         except Exception as e:
             return False, str(e)
         else:
@@ -51,7 +51,7 @@ class SearchEngineSuggestions:
         kw = kw.casefold().replace(' ', '+')
         try:
             html = requests.get(f'https://duckduckgo.com/ac/?q={kw}',
-                                headers=SearchEngineSuggestions.headers)
+                                headers=SearchEngineSuggestions.headers, timeout=config.timeout)
         except Exception as e:
             return False, str(e)
         else:
@@ -63,7 +63,7 @@ class SearchEngineSuggestions:
         kw = kw.casefold().replace(' ', '+')
         try:
             html = requests.get(f'https://ac.ecosia.org/?q={kw}',
-                                headers=SearchEngineSuggestions.headers)
+                                headers=SearchEngineSuggestions.headers, timeout=config.timeout)
         except Exception as e:
             return False, str(e)
         else:
@@ -75,7 +75,7 @@ class SearchEngineSuggestions:
         kw = kw.casefold().replace(' ', '+')
         try:
             html = requests.get(f'https://search.brave.com/api/suggest?q={kw}',
-                                headers=SearchEngineSuggestions.headers)
+                                headers=SearchEngineSuggestions.headers, timeout=config.timeout)
         except Exception as e:
             return False, str(e)
         else:
@@ -87,7 +87,8 @@ class SearchEngineSuggestions:
         kw = kw.casefold().replace(' ', '+')
         try:
             html = requests.get(f'https://www.google.com/complete/search?q={kw}'
-                                f'&client=firefox', headers=SearchEngineSuggestions.headers)
+                                f'&client=firefox', headers=SearchEngineSuggestions.headers,
+                                timeout=config.timeout)
         except Exception as e:
             return False, str(e)
         else:
@@ -100,7 +101,7 @@ class SearchEngineSuggestions:
         try:
             #Got the API from https://stackoverflow.com/a/15318150
             html = requests.get(f'https://api.bing.com/osjson.aspx?query={kw}',
-                                headers=SearchEngineSuggestions.headers)
+                                headers=SearchEngineSuggestions.headers, timeout=config.timeout)
         except Exception as e:
             return False, str(e)
         else:
